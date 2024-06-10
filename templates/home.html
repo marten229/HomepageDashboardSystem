@@ -1,0 +1,84 @@
+<!-- SearchFilterFunctions/templates/SearchFilterFunctions/home.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Restaurant Search</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <script src="{% static 'script.js' %}" defer></script>
+    <script src="{% static 'slideshow.js' %}" defer></script>
+    <script src="{% static 'slidescon.js' %}" defer></script>
+</head>
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo">RestaurantSearch</a>
+        <ul class="nav-links">
+          <i class="uil uil-times navCloseBtn"></i>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Tisch Buchen</a></li>
+          <li><a href="#">Unternehmer</a></li>
+          <li><a href="#">Kritik</a></li>
+          <li><a href="#">Manager</a></li>
+        </ul>
+
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">
+          <i class="uil uil-search search-icon"></i>
+          <input type="text" placeholder="Search here..." />
+        </div>
+      </nav>
+    </header> 
+    <div class="slideshow">
+        <div class="slide">
+            <img src="{% static 'image/bild1.jpg' %}" class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Finde dein perfektes Restaurant</h3>
+                <p class="slide-beschreibung">Beschreibung</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'image/bild2.jpg' %}"  class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Essen noch deinen Wuenschen</h3>
+                <p class="slide-beschreibung">Beschreibung</p>
+            </div>  
+        </div>
+        <div class="slide">
+            <img src="{% static 'image/bild3.jpg' %}"  class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Dein perfektes Restaurant</h3>
+                <p class="slide-beschreibung">Beschreibung</p>
+            </div>  
+        </div>
+        <a class="pfeil pfeil-links" onclick="umschalten(-1)"><span>&#10094;</span></a>
+        <a class="pfeil pfeil-rechts" onclick="umschalten(1)"><span>&#10095;</span></a>
+        <ol class="indikatorenliste">
+            <li class="indikator" onclick="springeZuEintrag(0)">&#8226;</li>
+            <li class="indikator" onclick="springeZuEintrag(1)">&#8226;</li>
+            <li class="indikator" onclick="springeZuEintrag(2)">&#8226;</li>
+        </ol>
+    </div>
+    <div class="restaurant-container">
+      <a class="restaurant-pfeil pfeil-links" onclick="wechselRestaurants(-1)"><span>&#10094;</span></a>
+      <div class="restaurant-kacheln">
+        {% for restaurant in restaurants %}
+        <div class="kachel">
+          <div class="kachel-overlay"></div>
+          <img src="{% static restaurant.photo %}" alt="{{ restaurant.name }}">
+          <div class="kachel-text">{{ restaurant.name }}</div>
+          <button class="buch-button">Buchen</button>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="restaurant-pfeil pfeil-rechts" onclick="wechselRestaurants(1)"><span>&#10095;</span></a>
+    </div>
+  </div>
+</body>
+</html>
+

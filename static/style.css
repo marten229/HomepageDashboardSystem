@@ -1,0 +1,371 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+.grid-container {
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: 60px auto auto 5%;
+  background-color: #f0faff;
+}
+
+/* Header */
+header {
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+
+/* Slideshow */
+.slideshow {
+  grid-column: 1 / 4;
+  grid-row: 2 / 4;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 10px gray;
+  position: relative;
+  margin-top: 5px;
+}
+
+/* Restaurant Kacheln */
+.restaurant-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 20%;
+  grid-column: 1 / 4;
+  grid-row: 4;
+}
+
+.restaurant-kacheln {
+  display: flex;
+  overflow: hidden;
+  width: 80%;
+}
+
+.kachel {
+  flex: 0 0 33.3333%;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.kachel img {
+  width: 100%;
+  height: auto;
+}
+
+.kachel-text {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+}
+
+.kachel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.3s;
+}
+
+.kachel:hover .kachel-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.kachel:hover .buch-button {
+  opacity: 1;
+}
+
+.buch-button {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  padding: 10px 20px;
+  background-color: #4a98f7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buch-button:hover {
+  background-color: #357ae8;
+}
+
+.restaurant-pfeil {
+  font-size: 30px;
+  cursor: pointer;
+  user-select: none;
+  z-index: 1;
+}
+
+.restaurant-pfeil.pfeil-links {
+  position: absolute;
+  left: 10px;
+}
+
+.restaurant-pfeil.pfeil-rechts {
+  position: absolute;
+  right: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  background: #f0faff;
+}
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 200px;
+  background: #4a98f7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000; /* Höhere z-Index für das Menü */
+}
+.nav,
+.nav .nav-links {
+  display: flex;
+  align-items: center;
+}
+.nav {
+  justify-content: space-between;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+.nav .logo {
+  font-size: 22px;
+  font-weight: 500;
+}
+.nav .nav-links {
+  column-gap: 20px;
+  list-style: none;
+}
+.nav .nav-links a {
+  transition: all 0.2s linear;
+}
+.nav.openSearch .nav-links a {
+  opacity: 0;
+  pointer-events: none;
+}
+.nav .search-icon {
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+.nav .search-box {
+  position: absolute;
+  right: 250px;
+  height: 45px;
+  max-width: 555px;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.2s linear;
+}
+.nav.openSearch .search-box {
+  opacity: 1;
+  pointer-events: auto;
+}
+.search-box .search-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  left: 15px;
+  color: #4a98f7;
+  transform: translateY(-50%);
+}
+.search-box input {
+  height: 100%;
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  background-color: #fff;
+  padding: 0 15px 0 45px;
+}
+
+.nav .navOpenBtn,
+.nav .navCloseBtn {
+  display: none;
+}
+
+/* responsive */
+@media screen and (max-width: 1160px) {
+  .nav {
+    padding: 15px 100px;
+  }
+  .nav .search-box {
+    right: 150px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .nav {
+    padding: 15px 50px;
+  }
+  .nav .search-box {
+    right: 100px;
+    max-width: 400px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .nav .navOpenBtn,
+  .nav .navCloseBtn {
+    display: block;
+  }
+  .nav {
+    padding: 15px 20px;
+  }
+  .nav .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    max-width: 280px;
+    width: 100%;
+    padding-top: 100px;
+    row-gap: 30px;
+    flex-direction: column;
+    background-color: #11101d;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+    z-index: 100;
+  }
+  .nav.openNav .nav-links {
+    left: 0;
+  }
+  .nav .navOpenBtn {
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .nav .navCloseBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  .nav .search-box {
+    top: calc(100% + 10px);
+    max-width: calc(100% - 20px);
+    right: 50%;
+    transform: translateX(50%);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+}
+
+
+.slideshow {
+  width: 100vw;  /* Vollbildbreite */
+    height: 100vh;  /* Vollbildhöhe */
+    box-shadow: 0px 0px 10px gray;
+    position: relative;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 2s;
+}
+
+.slide-bild {
+  width: 100%;
+  height: 100%;  /* Fügt hinzu, um die gesamte Höhe auszufüllen */
+  object-fit: cover;  /* Fügt hinzu, um das Bild zu skalieren und zuzuschneiden */
+}
+
+.slide-textbereich {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  top: 70%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  font-family: sans-serif;
+  padding: 0 15% 0 15%;
+}
+
+.slide-ueberschrift {
+  font-size: 2em;
+  margin: 10px 0;
+}
+
+.slide-beschreibung {
+  font-size: 1.4em;
+  margin: 0;
+}
+
+.pfeil {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  font-size: 50px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  color: rgba(255, 255, 255, 0.5);
+  user-select: none;
+  cursor: pointer;
+}
+
+.pfeil:hover {
+  color: white;
+}
+
+.pfeil-links {
+  left: 0;
+}
+
+.pfeil-rechts {
+  right: 0;
+}
+
+.indikatorenliste {
+  position: absolute;
+  bottom: 10px;  /* Ändert die Positionierung nach unten */
+  left: 0;
+  right: 0;
+  list-style-type: none;
+  font-size: 40px;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.indikator {
+  padding: 0 10px;
+  user-select: none;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 2s;
+}
+
+.aktiv {
+  opacity: 1;
+}
+
+.aktiv {
+  opacity: 1;
+}
