@@ -31,9 +31,13 @@ function springeZuEintrag(neuerIndex) {
 }
 
 // Funktion zum automatischen Wechseln der Bilder
-function automatischerWechsel() {a
+function automatischerWechsel() {
     umschalten(1);
 }
 
 // Intervall für automatischen Wechsel einstellen
 setInterval(automatischerWechsel, 5000);  // 5000 Millisekunden = 5 Sekunden
+
+
+
+

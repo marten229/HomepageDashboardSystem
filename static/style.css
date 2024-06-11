@@ -1,115 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
 .grid-container {
   display: grid;
-  grid-template-columns: 10% 80% 10%;
-  grid-template-rows: 60px auto auto 5%;
-  background-color: #f0faff;
+  grid-template-columns: 10% 20% 60% 20% 10%;
+  grid-template-rows: 55px auto auto auto 5%;
 }
 
 /* Header */
 header {
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
   grid-row: 1;
 }
 
 /* Slideshow */
 .slideshow {
-  grid-column: 1 / 4;
-  grid-row: 2 / 4;
+  grid-column: 1 / 5;
+  grid-row: 2 / 2;
   width: 100%;
   height: 100%;
   box-shadow: 0px 0px 10px gray;
   position: relative;
   margin-top: 5px;
-}
-
-/* Restaurant Kacheln */
-.restaurant-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 20%;
-  grid-column: 1 / 4;
-  grid-row: 4;
-}
-
-.restaurant-kacheln {
-  display: flex;
-  overflow: hidden;
-  width: 80%;
-}
-
-.kachel {
-  flex: 0 0 33.3333%;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.kachel img {
-  width: 100%;
-  height: auto;
-}
-
-.kachel-text {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding: 10px;
-}
-
-.kachel-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0);
-  transition: background 0.3s;
-}
-
-.kachel:hover .kachel-overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.kachel:hover .buch-button {
-  opacity: 1;
-}
-
-.buch-button {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: opacity 0.3s;
-  padding: 10px 20px;
-  background-color: #4a98f7;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.buch-button:hover {
-  background-color: #357ae8;
-}
-
-.restaurant-pfeil {
-  font-size: 30px;
-  cursor: pointer;
-  user-select: none;
-  z-index: 1;
-}
-
-.restaurant-pfeil.pfeil-links {
-  position: absolute;
-  left: 10px;
-}
-
-.restaurant-pfeil.pfeil-rechts {
-  position: absolute;
-  right: 10px;
 }
 
 * {
@@ -119,7 +29,10 @@ header {
   font-family: "Poppins", sans-serif;
 }
 body {
-  background: #f0faff;
+  background-color: #DBA85D;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 .nav {
   position: fixed;
@@ -127,7 +40,7 @@ body {
   left: 0;
   width: 100%;
   padding: 15px 200px;
-  background: #4a98f7;
+  background-color: #333333;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Höhere z-Index für das Menü */
 }
@@ -266,12 +179,11 @@ a {
   }
 }
 
-
 .slideshow {
   width: 100vw;  /* Vollbildbreite */
-    height: 100vh;  /* Vollbildhöhe */
-    box-shadow: 0px 0px 10px gray;
-    position: relative;
+  height: 100vh;  /* Vollbildhöhe */
+  box-shadow: 0px 0px 10px gray;
+  position: relative;
 }
 
 .slide {
@@ -365,7 +277,107 @@ a {
 .aktiv {
   opacity: 1;
 }
-
-.aktiv {
-  opacity: 1;
+/* Carousel */
+.carousel-container {
+  grid-column: 2 / 4;
+  grid-row: 4 / 4;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
+
+.carousel {
+  display: flex;
+  overflow: hidden;
+  width: 80%;
+  max-width: 1200px;
+}
+
+.carousel-item {
+  min-width: 33.333%; /* Drei Elemente gleichzeitig */
+  box-sizing: border-box;
+  padding: 10px;
+  transition: transform 0.5s ease;
+  position: relative;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.carousel-item-text {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.carousel-pfeil {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  user-select: none;
+}
+
+.carousel-pfeil:hover {
+  color: black;
+}
+
+.carousel-pfeil-links {
+  left: 0;
+}
+
+.carousel-pfeil-rechts {
+  right: 0;
+}
+
+/* Hover Effekt */
+.carousel-item:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.carousel-item:hover .carousel-item-text {
+  display: block;
+}
+.grid-container, .slideshow, .carousel-container {
+  filter: sepia(10%) brightness(90%);
+}
+
+/* Überschrift und Textfarben anpassen */
+h1, h2, h3, h4, p, a {
+  color: #d6d4d4; /* Dunkelgrau */
+}
+
+/* Pfeil- und Carousel-Buttonfarben anpassen */
+.pfeil, .carousel-pfeil {
+  color: #333333; /* Dunkelgrau */
+}
+
+/* Hover-Effekt für den Carousel hinzufügen */
+.carousel-item:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.ueberschrift {
+  margin-top: 10%;
+  margin-bottom: 2%;
+  grid-column: 2 / 4;
+  grid-row: 3 / 3;
+  font-size: 150%;
+  text-align: center;
+}
+

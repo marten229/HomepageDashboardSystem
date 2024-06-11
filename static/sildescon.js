@@ -1,19 +1,31 @@
-let aktuellerIndex = 0;
-const kachelnProSeite = 3;
-const kacheln = document.querySelectorAll('.kachel');
-const gesamtKacheln = kacheln.length;
+// Carousel
+let carouselIndex = 0;
+const carouselItems = document.querySelectorAll('.carousel-item');
 
-function wechselRestaurants(anzahl) {
-  aktuellerIndex += anzahl;
+function showCarouselItems() {
+  const totalItems = carouselItems.length;
+  const itemsPerView = 3;
 
-  if (aktuellerIndex < 0) {
-    aktuellerIndex = 0;
+  for (let i = 0; i < totalItems; i++) {
+    if (i >= carouselIndex && i < carouselIndex + itemsPerView) {
+      carouselItems[i].style.display = 'block';
+    } else {
+      carouselItems[i].style.display = 'none';
+    }
   }
-
-  if (aktuellerIndex > gesamtKacheln - kachelnProSeite) {
-    aktuellerIndex = gesamtKacheln - kachelnProSeite;
-  }
-
-  const verschiebung = -aktuellerIndex * 100 / kachelnProSeite;
-  document.querySelector('.restaurant-kacheln').style.transform = `translateX(${verschiebung}%)`;
 }
+
+function carouselUmschalten(anzahl) {
+  const totalItems = carouselItems.length;
+  const itemsPerView = 3;
+  
+  carouselIndex += anzahl;
+  if (carouselIndex < 0) {
+    carouselIndex = totalItems - itemsPerView;
+  } else if (carouselIndex >= totalItems) {
+    carouselIndex = 0;
+  }
+  showCarouselItems();
+}
+
+showCarouselItems();
