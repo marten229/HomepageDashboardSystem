@@ -32,6 +32,9 @@
         <div class="search-box">
           <i class="uil uil-search search-icon"></i>
           <input type="text" placeholder="Search here..." />
+          <form action="{% url 'search_results' %}" method="GET">
+            <input type="text" name="query" placeholder="Search here..." required />
+          </form>
         </div>
       </nav>
     </header> 
