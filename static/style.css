@@ -44,6 +44,27 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000; /* Höhere z-Index für das Menü */
 }
+.nav-links a, .nav-links form {
+  color: #fff;
+  text-decoration: none;
+  padding: 0 10px;
+  display: inline-block;
+}
+.nav-links form {
+  padding: 0;
+}
+.nav-links form button {
+  background: none;
+  border: none;
+  padding: 0;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  font: inherit;
+}
+.nav-links form button:hover {
+  text-decoration: underline;
+}
 .nav,
 .nav .nav-links {
   display: flex;
