@@ -27,13 +27,10 @@
           <li><a href="#">Kritik</a></li>
           <li><a href="#">Manager</a></li>
         </ul>
-
         <i class="uil uil-search search-icon" id="searchIcon"></i>
-        <div class="search-box">
-          <i class="uil uil-search search-icon"></i>
-          <input type="text" placeholder="Search here..." />
+        <div class="search-box">      
           <form action="{% url 'search_results' %}" method="GET">
-            <input type="text" name="query" placeholder="Search here..." required />
+            <input type="text" name="query" placeholder="Search here..." required ></input>
           </form>
         </div>
       </nav>
