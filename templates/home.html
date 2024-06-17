@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Restaurant Search</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <script src="{% static 'script.js' %}" defer></script>
+    <script src="{% static 'slideshow.js' %}" defer></script>
+    <script src="{% static 'sildescon.js' %}" defer></script>
+
+</head>
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="#" class="logo">RestaurantSearch</a>
+        <ul class="nav-links">
+          <i class="uil uil-times navCloseBtn"></i>
+          <li><a href="{% url 'startpage' %}">Home</a></li>
+          <li><a href="{% url 'search_restaurants' %}">Tisch Buchen</a></li>
+          {% if not user.is_authenticated %}
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li><a href="{% url 'register' %}">Registrieren</a></li>
+          {% else %}
+            {% if user.role == 'administrator' or user.role == 'restaurant_owner' or user.role == 'restaurant_staff' %}
+            <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            {% endif %}
+            <li><a href="{% url 'reservation-list' %}">Meine Reservierungen</a></li>
+            <li>
+              <form id="logout-form" action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                  <button type="submit">Logout</button>     
+              </form>
+            </li>
+          {% endif %}
+        </ul>
+        <i class="uil uil-search search-icon" id="searchIcon"></i>
+        <div class="search-box">      
+          <form action="{% url 'search_results' %}" method="GET">
+            <input type="text" name="query" placeholder="Search here..." required></input>
+          </form>
+        </div>
+      </nav>
+    </header> 
+    <div class="slideshow">
+        <div class="slide">
+            <img src="{% static 'image/bild1.jpg' %}" class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Finde dein perfektes Restaurant</h3>
+                <p class="slide-beschreibung">Mit unserer umfassenden Suche und authentischen Bewertungen findest du mühelos das ideale Restaurant, das all deine kulinarischen Wünsche erfüllt.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="{% static 'image/bild2.jpg' %}" class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Essen nach deinen Wünschen</h3>
+                <p class="slide-beschreibung">Du kannst in unserer Suche nach deinen Wünschen suchen</p>
+            </div>  
+        </div>
+        <div class="slide">
+            <img src="{% static 'image/bild3.jpg' %}" class="slide-bild">
+            <div class="slide-textbereich">
+                <h3 class="slide-ueberschrift">Dein perfektes Restaurant</h3>
+                <p class="slide-beschreibung">Jeder findet sein Restaurant für ein wundervolles Essen!</p>
+            </div>  
+        </div>
+        <a class="pfeil pfeil-links" onclick="umschalten(-1)"><span>&#10094;</span></a>
+        <a class="pfeil pfeil-rechts" onclick="umschalten(1)"><span>&#10095;</span></a>
+        <ol class="indikatorenliste">
+            <li class="indikator" onclick="springeZuEintrag(0)">&#8226;</li>
+            <li class="indikator" onclick="springeZuEintrag(1)">&#8226;</li>
+            <li class="indikator" onclick="springeZuEintrag(2)">&#8226;</li>
+        </ol>
+    </div>
+    <div class="ueberschrift">
+      <h1>Restaurants</h1>
+    </div>
+    <div class="carousel-container">
+      <a class="carousel-pfeil carousel-pfeil-links" onclick="carouselUmschalten(-1)">&#10094;</a>
+      <div class="carousel">
+        {% for restaurant in restaurants %}
+          <div class="carousel-item">
+              <a href="{% url 'restaurant-detail' restaurant.pk %}">
+                {% if restaurant.photo %}
+                  <img src="{{ restaurant.photo.url }}" alt="{{ restaurant.name }}">
+                {% endif %}
+                <div class="carousel-item-text">
+                  <h4>{{ restaurant.name }}</h4>
+                </div>
+             </a>
+          </div>
+        {% endfor %}
+      </div>
+      <a class="carousel-pfeil carousel-pfeil-rechts" onclick="carouselUmschalten(1)">&#10095;</a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Deine Restaurants</h1>
+    <div class="restaurant-list">
+        {% for restaurant in restaurants %}
+        <div class="restaurant-item">
+            <h2>{{ restaurant.name }}</h2>
+            <p>{{ restaurant.description }}</p>
+            <a href="{% url 'dashboard_detail' restaurant.id %}" class="button">Anzeigen</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% if user.role == 'administrator' or user.role == 'restaurant_owner' %}
+    <div class="create-restaurant">
+        <a href="{% url 'create_restaurant' %}" class="button">Neues Restaurant erstellen</a>
+    </div>
+    {% endif %}
+</div>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    .restaurant-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .restaurant-item {
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .restaurant-item h2 {
+        margin-top: 0;
+    }
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        color: white;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+    .button:hover {
+        background-color: #45a049;
+    }
+    .create-restaurant {
+        margin-top: 20px;
+        text-align: center;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>{% block title %}Restaurant Search{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    {% block extra_styles %}{% endblock %}
+</head>
+<body>
+  <div class="grid-container">
+    <header class="header">
+      <nav class="nav">
+        <i class="uil uil-bars navOpenBtn"></i>
+        <a href="{% url 'dashboard' %}" class="logo">Dashboard</a>
+        <ul class="nav-links">
+          <i class="uil uil-times navCloseBtn"></i>
+          {% if restaurant %}
+          <li><a href="{% url 'startpage' %}">Homepage</a></li>
+          <li><a href="{% url 'reservations_view' restaurant.id %}">Reservierungen</a></li>
+          <li><a href="{% url 'table_list' restaurant.id %}">Tische verwalten</a></li>
+          <li><a href="{% url 'generate_and_view_plans' restaurant.id %}">Sitzplan und Personalplan</a></li>
+          <li><a href="{% url 'restaurant-reviews' restaurant.id %}">Bewertungen</a></li>
+          <li><a href="{% url 'analyze_customer_data' restaurant.id %}">Marketing</a></li>
+          {% if user.role == 'administrator' or user.role == 'restaurant_owner' %}
+          <li><a href="{% url 'settings' restaurant.id %}">Einstellungen</a></li>
+          {% endif %}
+          {% endif %}
+        </ul>
+
+        
+        <div>
+          
+        </div>
+      </nav>
+    </header> 
+
+    <div class="block-content-container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </div>
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>
