@@ -107,7 +107,9 @@
         {% for restaurant in restaurants %}
           <div class="carousel-item">
               <a href="{% url 'restaurant-detail' restaurant.pk %}">
-                <img src="{% static restaurant.photo %}" alt="{{ restaurant.name }}">
+                {% if restaurant.photo %}
+                  <img src="{{ restaurant.photo.url }}" alt="{{ restaurant.name }}">
+                {% endif %}
                 <div class="carousel-item-text">
                   <h4>{{ restaurant.name }}</h4>
                 </div>
