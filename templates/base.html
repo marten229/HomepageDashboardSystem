@@ -18,6 +18,7 @@
         <ul class="nav-links">
           <i class="uil uil-times navCloseBtn"></i>
           {% if restaurant %}
+          <li><a href="{% url 'startpage' %}">Homepage</a></li>
           <li><a href="{% url 'reservations_view' restaurant.id %}">Reservierungen</a></li>
           <li><a href="{% url 'table_list' restaurant.id %}">Tische verwalten</a></li>
           <li><a href="{% url 'generate_and_view_plans' restaurant.id %}">Sitzplan und Personalplan</a></li>
